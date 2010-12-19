@@ -1,6 +1,8 @@
 dbxml for Debian
 ----------------
 
-<possible notes regarding this package - if none, delete this file>
+The Berkeley DB XML source distribution comes with the source code for
+Berkeley DB 4.8, XQilla and Xerces-C bundled. This version is built against
+the Debian versions of those packages.
 
- -- root <j.koekkoek@perrit.nl>  Thu, 28 Oct 2010 10:23:26 +0200
+ -- Lars Buitinck <larsmans@gmail.com> Sun, 19 Dec 2010 18:22:26 +0200
