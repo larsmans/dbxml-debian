@@ -50,7 +50,7 @@ Package: libdbxml-dev
 Architecture: any
 Section: libdevel
 Priority: extra
-Depends: libdbxml (= ${binary:Version})
+Depends: libdbxml (= ${binary:Version}) libdb4.8-dev (>= 4.8.30-2)
 Suggests: dbxml-doc libdbxml-dbg
 Description: Oracle Berkeley DB XML libraries [development]
  Embedded native XML database library.
