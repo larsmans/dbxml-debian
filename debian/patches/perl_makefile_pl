@@ -1,0 +1,11 @@
+--- dbxml-2.5.16/dbxml/src/perl/Makefile.PL~	2009-12-22 14:17:00.000000000 +0100
++++ dbxml-2.5.16/dbxml/src/perl/Makefile.PL	2010-10-25 11:03:47.000000000 +0200
+@@ -15,7 +15,7 @@
+       (ABSTRACT => 'Berkeley DB XML Perl Interface',
+        AUTHOR     => 'Paul Marquess <pmqs@cpan.org>') : ()),
+     MAN3PODS 		=> {},
+-
++    SITEPREFIX => "\$(PREFIX)",
+ );
+ 
+ foreach my $dir ( qw( Db DbXml ) )

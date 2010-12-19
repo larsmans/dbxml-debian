@@ -1,0 +1,103 @@
+Source: dbxml
+Section: unknown
+Priority: extra
+Maintainer: Jeroen Koekkoek <j.koekkoek@perrit.nl>
+Build-Depends: debhelper (>= 7.0.50~), tcl8.5-dev, default-jdk-builddep [!arm !hppa !hurd-i386 !m32r !avr32], libdb4.8++-dev, libdb4.8-java-dev, libxqilla-dev, libxerces-c-dev, junit4
+Standards-Version: 3.8.4
+Homepage: http://www.oracle.com/technology/software/products/berkeley-db/db/index.html
+#Vcs-Git: git://git.debian.org/collab-maint/dbxml.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/dbxml.git;a=summary
+
+Package: dbxml-doc
+Architecture: all
+Description: Oracle Berkeley DB XML Documentation [html]
+ This package contains documentation in HTML format for all of
+ the APIs (C, C++, C#, STL, Java, Tcl, Perl) and utilities provided by Oracle
+ Berkeley DB XML.
+
+Package: dbxml-util
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Oracle Berkeley DB XML Utilities
+ This package provides different tools for manipulating databases in the Oracle
+ Berkeley DB XML database format.
+
+Package: libdbxml
+Architecture: any
+Section: libs
+Priority: standard
+Depends: ${shlibs:Depends}
+Suggests: dbxml-util
+Description: Oracle Berkeley DB XML Libraries [runtime]
+ This is the runtime package for programs that use the v2.5 Berkeley
+ library.
+
+Package: libdbxml-dbg
+Architecture: any
+Section: debug
+Priority: extra
+Depends: libdbxml (= ${binary:Version})
+Description: Oracle Berkeley DB XML Libraries [debug]
+ This package provides the debug symbols for the Oracle Berkeley DB XML
+ library.
+
+Package: libdbxml-dev
+Architecture: any
+Section: libdevel
+Priority: extra
+Depends: libdbxml (= ${binary:Version})
+Suggests: dbxml-doc
+Description: Oracle Berkeley DB XML Libraries [development]
+ This is the development package which contains headers and static
+ libraries for the Oracle Berkeley DB XML library.
+
+Package: libdbxml-java
+Architecture: any
+Section: java
+Priority: optional
+Provides: libdb-java
+Conflicts: libdb-java
+Depends: ${shlibs:Depends}
+Recommends: libdbxml-java-gcj
+Description: Oracle Berkeley DB XML Libraries for Java
+ This package provides the Java interface for the Oracle Berkeley DB XML
+ library.
+
+Package: libdbxml-java-dev
+Architecture: any
+Section: libdevel
+Priority: optional
+Provides: libdbxml-java-dev
+Conflicts: libdbxml-java-dev
+Depends: ${shlibs:Depends}, libdbxml-java
+Description: Oracle Berkeley DB XML Libraries for Java [development]
+ This package provides the Java interface for the Oracle Berkeley DB XML
+ library.
+
+Package: libdbxml-java-gcj
+Architecture: any
+Section: java
+Priority: optional
+Depends: libdbxml-java (>= ${source:Version}), libgcj-common (>> 1:4.1.1-13), ${shlibs:Depends}
+Description: Oracle Berkeley DB XML Libraries for Java (native code)
+ This package provides the Java interface for the Oracle Berkeley DB XML
+ library.
+ .
+ This package contains the natively compiled code for use by gij.
+
+Package: libdbxml-tcl
+Architecture: any
+Section: interpreters
+Priority: extra
+Depends: ${shlibs:Depends}
+Description: Oracle Berkeley DB XML Libraries for Tcl [module]
+ This package provides a Tcl module suitable for accessing Oracle Berkeley DB XML
+ databases from within Tcl programs.
+
+Package: libsleepycat-dbxml-perl
+Architecture: any
+Section: perl
+Depends: ${shlibs:Depends}, libdbxml
+Description: Oracle Berkeley DB XML Libraries for Perl [module]
+ This package provides the Perl interface for the Oracle Berkeley DB XML
+ library.

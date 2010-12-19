@@ -1,0 +1,3 @@
+usr/lib/libdbxml_java-2.5.so
+usr/lib/*.jar usr/share/java
+../../dbxml/examples/java/* usr/share/doc/libdbxml-java/examples

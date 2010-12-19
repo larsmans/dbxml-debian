@@ -1,0 +1,4 @@
+usr/lib/perl
+usr/man
+usr/share/perl
+../../dbxml/examples/perl/gettingStarted usr/share/doc/libsleepycat-dbxml-perl/examples

@@ -1,0 +1,11 @@
+--- dbxml-2.5.16/dbxml/src/perl/Db/Makefile.PL~	2009-12-22 14:17:00.000000000 +0100
++++ dbxml-2.5.16/dbxml/src/perl/Db/Makefile.PL	2010-10-25 16:43:09.000000000 +0200
+@@ -46,7 +46,7 @@
+        'LIBC' => $parsed{EXTRA_LIBS},
+        ):
+      (
+-      'CCFLAGS'		=> $ccflags,
++      'CCFLAGS'		=> $ccflags ? $ccflags .= ' -Wno-write-strings' : '-Wno-write-strings',
+       )
+      ),
+     #'macro'		=> { 'CC' => $CC, 'LD'	=> '$(CC)' } ,
