@@ -30,7 +30,7 @@ Architecture: any
 Section: libs
 Priority: standard
 Depends: ${shlibs:Depends}
-Suggests: dbxml-util libdbxml-dev
+Suggests: dbxml-util, libdbxml-dev
 Description: Oracle Berkeley DB XML libraries [runtime]
  Embedded native XML database library.
  .
@@ -50,8 +50,8 @@ Package: libdbxml-dev
 Architecture: any
 Section: libdevel
 Priority: extra
-Depends: libdbxml (= ${binary:Version}) libdb4.8-dev (>= 4.8.30-2)
-Suggests: dbxml-doc libdbxml-dbg
+Depends: libdbxml (= ${binary:Version}), libdb4.8-dev (>= 4.8.30-2)
+Suggests: dbxml-doc, libdbxml-dbg
 Description: Oracle Berkeley DB XML libraries [development]
  Embedded native XML database library.
  .
