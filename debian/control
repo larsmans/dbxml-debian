@@ -1,6 +1,6 @@
 Source: dbxml
 Section: database
-Priority: extra
+Priority: optional
 Maintainer: Lars Buitinck <larsmans@gmail.com>
 Build-Depends: debhelper (>= 7.0.50~), tcl8.5-dev, default-jdk [!arm !hppa !hurd-i386 !m32r !avr32], libdb4.8++-dev, libdb4.8-java-dev, libxqilla-dev, libxerces-c-dev, junit4
 Standards-Version: 3.9.1

@@ -58,6 +58,9 @@ endif
 
 version=$(shell expr `pwd` : '.*-\([0-9.]*\)')
 
+%:
+	dh $@ --sourcedir=dbxml
+
 config.status:
 	dh_testdir
 
@@ -72,14 +75,8 @@ build-stamp: config.status
 	cd dbxml/src/perl && $(MAKE) LD_RUN_PATH=
 
 clean:
-	dh_testdir
-	dh_testroot
-
-	cd dbxml && $(MAKE) clean
-	rm -f dbxml/Makefile
-	cd dbxml/src/perl && $(MAKE) realclean
-
-	dh_clean
+	dh clean --sourcedir=dbxml
+	dh clean --sourcedir=dbxml/src/perl
 
 install: build
 	dh_testdir
