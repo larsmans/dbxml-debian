@@ -2,7 +2,7 @@ Source: dbxml
 Section: database
 Priority: optional
 Maintainer: Lars Buitinck <larsmans@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~), tcl8.5-dev, default-jdk [!arm !hppa !hurd-i386 !m32r !avr32], libdb4.8++-dev, libdb4.8-java-dev, libxqilla-dev, libxerces-c-dev, junit4
+Build-Depends: debhelper (>= 7.0.50~), tcl8.5-dev, default-jdk [!arm !hppa !hurd-i386 !m32r !avr32], libdb4.8++-dev, libdb4.8-java-dev, libxqilla-dev, libxerces-c-dev, junit4, zlib1g-dev
 Standards-Version: 3.9.1
 Homepage: http://www.oracle.com/technology/software/products/berkeley-db/db/index.html
 #Vcs-Git: git://git.debian.org/collab-maint/dbxml.git

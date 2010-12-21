@@ -40,7 +40,8 @@ CONFIGURE_SWITCHES = --prefix=/usr \
                      --enable-test \
                      --with-berkeleydb=/usr \
                      --with-xqilla=/usr \
-                     --with-xerces=/usr
+                     --with-xerces=/usr \
+                     --with-zlib=/usr
 
 ifeq (,$(findstring z$(DEB_BUILD_GNU_CPU)z,$(JAVA_UNSUPPORTED_CPUS)))
 ifeq (,$(findstring z$(DEB_BUILD_GNU_SYSTEM)z,$(JAVA_UNSUPPORTED_SYSTEMS)))
