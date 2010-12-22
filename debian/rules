@@ -18,45 +18,17 @@
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
-DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
-DEB_BUILD_GNU_CPU ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_CPU)
-DEB_BUILD_GNU_SYSTEM ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_SYSTEM)
-DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-DEB_HOST_GNU_CPU ?= $(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
-DEB_HOST_GNU_SYSTEM ?= $(shell dpkg-architecture -qDEB_HOST_GNU_SYSTEM)
-DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
-
-JAVA_UNSUPPORTED_CPUS = zm32rz zarmz zhppaz zavr32z
-JAVA_UNSUPPORTED_SYSTEMS = zgnuz zknetbsd-gnuz
--include /usr/share/gcj/debian_defaults
-
-CONFIGURE_VARS = CC=gcc CFLAGS="$(CFLAGS)" CPPFLAGS="-I/usr/include/tcl8.5"
+CONFIGURE_VARS = CC=gcc CFLAGS="$(CFLAGS)" CXX=g++ CXXFLAGS="$(CXXFLAGS)"
 CONFIGURE_SWITCHES = --prefix=/usr \
                      --localstatedir=/var \
                      --sysconfdir=/etc \
                      --libexecdir=/usr/lib \
                      --disable-rpath \
-                     --enable-tcl \
-                     --with-tcl=/usr/lib/tcl8.5 \
                      --enable-test \
                      --with-berkeleydb=/usr \
                      --with-xqilla=/usr \
                      --with-xerces=/usr \
                      --with-zlib=/usr
-
-ifeq (,$(findstring z$(DEB_BUILD_GNU_CPU)z,$(JAVA_UNSUPPORTED_CPUS)))
-ifeq (,$(findstring z$(DEB_BUILD_GNU_SYSTEM)z,$(JAVA_UNSUPPORTED_SYSTEMS)))
-JAVA_HOME = /usr/lib/jvm/default-java
-JAVA_BIN = $(JAVA_HOME)/bin
-CFLAGS += -I$(JAVA_HOME)/include
-JAVACFLAGS = -source 1.5
-CONFIGURE_VARS += GCJ="$(JAVA_BIN)/gcj"
-CONFIGURE_VARS += JAVAC="$(JAVA_BIN)/javac"
-CONFIGURE_VARS += JAVA="$(JAVA_BIN)/java" JAR="$(JAVA_BIN)/jar"
-CONFIGURE_VARS += JAVACFLAGS="$(JAVACFLAGS)"
-CONFIGURE_SWITCHES += --enable-java --with-junit=/usr/share/java/junit4.jar
-endif
-endif
 
 version=$(shell expr `pwd` : '.*-\([0-9.]*\)')
 
@@ -73,12 +45,6 @@ build-stamp: config.status
 	dh_testdir
 
 	cd dbxml && $(MAKE)
-	cd dbxml/src/perl && perl Makefile.PL
-	cd dbxml/src/perl && $(MAKE) LD_RUN_PATH=
-
-clean:
-	dh clean --sourcedir=dbxml
-	dh clean --sourcedir=dbxml/src/perl
 
 install: build
 	dh_testdir
@@ -100,30 +66,6 @@ endif
 		debian/tmp/usr/lib/libdbxml-2.5.so
 	# /libdbxml-dbg
 
-	# libdbxml-java
-	mv debian/tmp/usr/lib/dbxml.jar debian/tmp/usr/lib/libdbxml-java-$(version).jar
-	# /libdbxml-java
-
-	# libdbxml-java-gcj
-	mkdir -p debian/tmp/usr/lib/gcj
-	mkdir -p debian/tmp/usr/share/gcj/classmap.d
-	(TMPFILE=$$(mktemp --tmpdir sourcelist.XXXXXXXXXX) && \
-	find $(CURDIR)/dbxml -type f ! -type l >$$TMPFILE && \
-	aot-compile -L /usr/lib/gcj -c -fsource-filename=$$TMPFILE debian/tmp debian/tmp/usr/lib/gcj; \
-	retval=$$?; \
-	rm -f $$TMPFILE; exit $$retval)
-
-	mv debian/tmp/usr/lib/gcj/*.db debian/tmp/usr/share/gcj/classmap.d
-	# /libdbxml-java-gcj
-
-	# libsleepycat-dbxml-perl
-	cd dbxml/src/perl && $(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
-	cp -a debian/tmp/usr/lib/perl debian/tmp/usr/share/
-	find debian/tmp/usr/lib/perl -name *.p[ao]* -type f -exec rm -f '{}' \;
-	find debian/tmp/usr/share/perl ! -name *.pod -type f -exec rm -f '{}' \;
-	find debian/tmp/usr/share/perl -mindepth 2 -maxdepth 2 ! -path *Sleepycat* -exec rm -rf '{}' \;
-	# /libsleepycat-dbxml-perl
-
 # Build architecture-independent files here.
 binary-indep: build install
 # We have nothing to do by default.
@@ -138,7 +80,6 @@ binary-arch: build install
 	dh_installman
 	dh_link
 	dh_strip -Xlibdbxml-2.5.so
-	dh_compress -X.java -X.pl
 	dh_fixperms
 	dh_makeshlibs
 	dh_installdeb

@@ -2,7 +2,7 @@ Source: dbxml
 Section: database
 Priority: optional
 Maintainer: Lars Buitinck <larsmans@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~), tcl8.5-dev, default-jdk [!arm !hppa !hurd-i386 !m32r !avr32], libdb4.8++-dev, libdb4.8-java-dev, libxqilla-dev, libxerces-c-dev, junit4, zlib1g-dev
+Build-Depends: debhelper (>= 7.0.50~), libdb4.8++-dev, libxqilla-dev, libxerces-c-dev, zlib1g-dev
 Standards-Version: 3.9.1
 Homepage: http://www.oracle.com/technology/software/products/berkeley-db/db/index.html
 #Vcs-Git: git://git.debian.org/collab-maint/dbxml.git
@@ -56,57 +56,3 @@ Description: Oracle Berkeley DB XML libraries [development]
  Embedded native XML database library.
  .
  Headers and static libraries for the Oracle Berkeley DB XML library.
-
-Package: libdbxml-java
-Architecture: any
-Section: java
-Priority: optional
-Provides: libdb-java
-Conflicts: libdb-java
-Depends: ${shlibs:Depends}
-Recommends: libdbxml-java-gcj
-Description: Oracle Berkeley DB XML libraries for Java
- Embedded native XML database library.
- .
- Java interface.
-
-Package: libdbxml-java-dev
-Architecture: any
-Section: libdevel
-Priority: optional
-Provides: libdbxml-java-dev
-Conflicts: libdbxml-java-dev
-Depends: ${shlibs:Depends}, libdbxml-java
-Description: Oracle Berkeley DB XML libraries for Java [development]
- Embedded native XML database library.
- .
- Java interface, development files.
-
-Package: libdbxml-java-gcj
-Architecture: any
-Section: java
-Priority: optional
-Depends: libdbxml-java (>= ${source:Version}), libgcj-common (>> 1:4.1.1-13), ${shlibs:Depends}
-Description: Oracle Berkeley DB XML libraries for Java [native code]
- Embedded native XML database library.
- .
- Java interface, natively compiled code for use by gij.
-
-Package: libdbxml-tcl
-Architecture: any
-Section: interpreters
-Priority: extra
-Depends: ${shlibs:Depends}
-Description: Oracle Berkeley DB XML libraries for Tcl [module]
- Embedded native XML database library.
- .
- Tcl interface.
-
-Package: libsleepycat-dbxml-perl
-Architecture: any
-Section: perl
-Depends: ${shlibs:Depends}, libdbxml
-Description: Oracle Berkeley DB XML Libraries for Perl [module]
- Embedded native XML database library.
- .
- Perl interface.
