@@ -2,13 +2,14 @@ Source: dbxml
 Section: database
 Priority: optional
 Maintainer: Lars Buitinck <larsmans@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~), ${misc:Depends}, libdb4.8++-dev, libxqilla-dev, libxerces-c-dev, zlib1g-dev
+Build-Depends: debhelper (>= 7.0.50~), libdb4.8++-dev, libxqilla-dev, libxerces-c-dev, zlib1g-dev
 Standards-Version: 3.9.1
 Homepage: http://www.oracle.com/us/products/database/berkeley-db/index-066571.html
 
 Package: dbxml-doc
 Architecture: all
 Section: doc
+Depends: ${misc:Depends}
 Description: Oracle Berkeley DB XML [HTML documentation]
  Embedded native XML database library.
  .
@@ -16,18 +17,18 @@ Description: Oracle Berkeley DB XML [HTML documentation]
 
 Package: dbxml-util
 Architecture: any
-Depends: libdbxml (= ${binary:Version})
+Depends: libdbxml-2.5 (= ${binary:Version}), ${misc:Depends}
 Suggests: db4.8-util
 Description: Oracle Berkeley DB XML utilities
  Embedded native XML database library.
  .
  Various tools for manipulating Berkeley DB XML database files.
 
-Package: libdbxml
+Package: libdbxml-2.5
 Architecture: any
 Section: libs
 Priority: standard
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: dbxml-util, libdbxml-dev
 Description: Oracle Berkeley DB XML libraries [runtime]
  Embedded native XML database library.
@@ -38,7 +39,7 @@ Package: libdbxml-dev
 Architecture: any
 Section: libdevel
 Priority: extra
-Depends: libdbxml (= ${binary:Version}), libdb4.8-dev (>= 4.8.30-2)
+Depends: libdbxml-2.5 (= ${binary:Version}), libdb4.8-dev (>= 4.8.30-2), ${misc:Depends}
 Suggests: dbxml-doc
 Description: Oracle Berkeley DB XML libraries [development]
  Embedded native XML database library.
