@@ -2,11 +2,9 @@ Source: dbxml
 Section: database
 Priority: optional
 Maintainer: Lars Buitinck <larsmans@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~), libdb4.8++-dev, libxqilla-dev, libxerces-c-dev, zlib1g-dev
+Build-Depends: debhelper (>= 7.0.50~), ${misc:Depends}, libdb4.8++-dev, libxqilla-dev, libxerces-c-dev, zlib1g-dev
 Standards-Version: 3.9.1
-Homepage: http://www.oracle.com/technology/software/products/berkeley-db/db/index.html
-#Vcs-Git: git://git.debian.org/collab-maint/dbxml.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/dbxml.git;a=summary
+Homepage: http://www.oracle.com/us/products/database/berkeley-db/index-066571.html
 
 Package: dbxml-doc
 Architecture: all
@@ -18,8 +16,8 @@ Description: Oracle Berkeley DB XML [HTML documentation]
 
 Package: dbxml-util
 Architecture: any
-Section: database
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: libdbxml (= ${binary:Version})
+Suggests: db4.8-util
 Description: Oracle Berkeley DB XML utilities
  Embedded native XML database library.
  .
@@ -34,25 +32,15 @@ Suggests: dbxml-util, libdbxml-dev
 Description: Oracle Berkeley DB XML libraries [runtime]
  Embedded native XML database library.
  .
- Runtime libraries for programs that use Berkeley DB XML databases.
-
-Package: libdbxml-dbg
-Architecture: any
-Section: debug
-Priority: extra
-Depends: libdbxml (= ${binary:Version})
-Description: Oracle Berkeley DB XML libraries [debug]
- Embedded native XML database library.
- .
- Libraries with debugging symbols enabled.
+ Runtime library for programs that use Berkeley DB XML databases.
 
 Package: libdbxml-dev
 Architecture: any
 Section: libdevel
 Priority: extra
 Depends: libdbxml (= ${binary:Version}), libdb4.8-dev (>= 4.8.30-2)
-Suggests: dbxml-doc, libdbxml-dbg
+Suggests: dbxml-doc
 Description: Oracle Berkeley DB XML libraries [development]
  Embedded native XML database library.
  .
- Headers and static libraries for the Oracle Berkeley DB XML library.
+ Headers and static libraries for the Berkeley DB XML library.

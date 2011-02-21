@@ -5,4 +5,4 @@ The Berkeley DB XML source distribution comes with the source code for
 Berkeley DB 4.8, XQilla and Xerces-C bundled. This version is built against
 the Debian versions of those packages.
 
- -- Lars Buitinck <larsmans@gmail.com> Sun, 19 Dec 2010 18:22:26 +0200
+ -- Lars Buitinck <larsmans@gmail.com>  Mon, 21 Feb 2011 14:30:22 +0100
