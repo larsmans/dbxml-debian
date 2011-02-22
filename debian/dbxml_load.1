@@ -1,0 +1,112 @@
+.TH DBXML_LOAD 1 "Feb 22, 2011" Debian
+.SH NAME
+dbxml_load \- load Berkeley DB XML file from plaintext dump
+.SH SYNOPSIS
+.B dbxml_load
+.RB [ -V ]
+.RB [ -f
+.IR file ]
+.RB [ -h
+.IR home ]
+.RB [ -P
+.IR password ]
+.I xml_container
+.SH DESCRIPTION
+The
+.B dbxml_load
+utility reads from the standard input and loads it into the XML container
+.IR xml_container .
+The XML container
+.I xml_container
+is created if it does not already exist.
+.PP
+The input to
+.B dbxml_load
+must be in the output format specified by the
+.BR dbxml_dump (1)
+utility.
+.PP
+The options are as follows:
+.TP
+.BI -f\  file
+ead from the specified
+.I file
+instead of from the standard input.
+.TP
+.BI -h\  home
+Specify a home directory for the database environment.
+
+If a home directory is specified, the database environment is opened using the
+.BR DB_INIT_LOCK ,
+.BR DB_INIT_LOG ,
+.BR DB_INIT_MPOOL ,
+.BR DB_INIT_TXN ,
+and
+.B DB_USE_ENVIRON
+flags to
+.BR dbenv_open .
+(This means that
+.B dbxml_load
+can be used to load data into XML containers
+while they are in use by other processes.)
+If the
+.B dbenv_open
+call fails, or if no home directory is specified,
+the XML container is still updated, but the environment is ignored;
+for example, no locking is done.
+.TP
+.BI -P\  password
+Specify an environment password.
+Although Berkeley DB utilities overwrite password strings as soon as possible,
+be aware there may be a window of vulnerability
+on systems where unprivileged users can see command-line arguments
+or where utilities are not able to overwrite the memory
+containing the command-line arguments.
+.TP
+.B -V
+Write the library version number to the standard output, and exit.
+.PP
+The
+.B dbxml_load
+utility may be used with a Berkeley DB environment
+(as described for the
+.B -h
+option, the environment variable
+.BR DB_HOME ,
+or because the utility was run in a directory
+containing a Berkeley DB environment).
+In order to avoid environment corruption when using a Berkeley DB environment,
+.B dbxml_load
+should always be given the chance to detach from the environment
+and exit gracefully.
+To cause
+.B dbxml_load
+to release all environment resources and exit cleanly,
+send it an interrupt signal (SIGINT).
+.PP
+The
+.B dbxml_load
+utility exits 0 on success,
+1 if one or more key/data pairs were not loaded into the XML container
+because the key already existed,
+and >1 if an error occurs.
+.SH ENVIRONMENT VARIABLES
+.TP
+.B DB_HOME
+If the
+.B -h
+option is not specified and the environment variable
+.B DB_HOME
+is set, it is used as the path of the database home, as described in
+.BR dbenv_open .
+.SH SEE ALSO
+.BR db4.8_load (1),
+.BR dbxml (1),
+.BR dbxml_dump (1)
+.SH AUTHOR
+.B dbxml_load
+is part of Berkeley DB XML, developed by Oracle Corporation.
+.PP
+This manpage was formatted by Lars Buitinck <larsmans@gmail.com>,
+based on the Berkeley DB XML documentation,
+for the Debian project.

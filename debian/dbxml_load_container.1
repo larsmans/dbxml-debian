@@ -1,0 +1,104 @@
+.TH DBXML_LOAD_CONTAINER 1 "Feb 22, 2011" Debian
+.SH NAME
+dbxml_load_container \- load XML files into Berkeley DB XML container
+.SH SYNOPSIS
+.B dbxml_load_container
+.RB [ -c
+.IR container ]
+.RB [ -h
+.IR home ]
+.RB [ -s
+.IR type ]
+.RB [ -f
+.IR file_list ]
+.RB -p
+.IR file_list_path
+.RB [ -v ]
+.RB [ -V ]
+.RB [ -P
+.IR password ]
+.IR file1.xml ...
+.SH DESCRIPTION
+The
+.B dbxml_load_container
+utility loads XML documents into the specified container.
+XML files can either be specified as arguments,
+or they can be specified in a file using the
+.B -f
+option.
+.PP
+This utility will attempt to join an environment if one is active.
+It is recommended, however, that this tool be used offline.
+If the joined environment is transactional,
+this utility will also be transactional,
+with a separate transaction for each document added.
+.PP
+The options are as follows:
+.TP
+.BI -c\  container
+Specify the name of the container into which your want to load
+the identified documents.
+If the container does not currently exist, it is created for you.
+This is a required parameter.
+.TP
+.BI -f\  file
+Specify a file that contains a list of XML files to load into the container.
+.TP
+.BI -h\  home
+Specify a home directory for the database environment;
+by default, the current working directory is used.
+.TP
+.BI -P\  password
+Specify an environment password.
+Although Berkeley DB utilities overwrite password strings as soon as possible,
+be aware there may be a window of vulnerability
+on systems where unprivileged users can see command-line arguments
+or where utilities are not able to overwrite the memory
+containing the command-line arguments.
+.TP
+.BI -s\  type
+Specify the container type.
+Valid values for
+.I type
+are:
+.RS
+.IP \fBnode\fP
+Use node-level storage.
+XML documents are broken into their individual nodes,
+and the nodes are stored as individual records in the underlying database.
+This is the default.
+.IP \fBwholedoc\fP
+Use whole-document storage.
+Entire XML documents are stored as individual records
+in the underlying database.
+.RE
+Note that if the container already exists, this option is ignored.
+.TP
+.B -V
+Write the library version number to the standard output, and exit.
+.TP
+.B -v
+Generate verbose output.
+.PP
+The
+.B dbxml_load_container
+utility exits 0 on success, and >0 if an error occurs.
+.SH ENVIRONMENT VARIABLES
+.TP
+.B DB_HOME
+If the
+.B -h
+option is not specified and the environment variable
+.B DB_HOME
+is set, it is used as the path of the database home, as described in
+.BR dbenv_open .
+.SH SEE ALSO
+.BR dbxml (1),
+.BR dbxml_load (1)
+.SH AUTHOR
+.B dbxml_load_container
+is part of Berkeley DB XML, developed by Oracle Corporation.
+.PP
+This manpage was formatted by Lars Buitinck <larsmans@gmail.com>,
+based on the Berkeley DB XML documentation,
+for the Debian project.

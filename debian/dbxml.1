@@ -1,0 +1,155 @@
+.TH DBXML 1 "Feb 22, 2011" Debian
+.SH NAME
+dbxml \- Berkeley DB XML interactive shell
+.SH SYNOPSIS
+.B dbxml
+.RB [ -ctVvx ]
+.RB [ -h
+.IR home ]
+.RB [ -P
+.IR password ]
+.RB [ -s
+.IR script ]
+.RB [ -z
+.IR size ]
+.SH DESCRIPTION
+The
+.B dbxml
+The dbxml utility provides an interactive shell
+that you can use to manipulate containers, documents and indices,
+and to perform XQuery queries against those containers.
+.PP
+.B dbxml
+uses an optional Berkeley DB home (environment) directory,
+which defaults to the current directory.
+An attempt is made to join an existing environment;
+if that fails, a private environment is created in the specified location.
+.B dbxml
+has a concept of a default open container;
+that is, the container upon which container operations
+such as adding and deleting indices are performed.
+The default container is set by use of the
+.B createContainer
+and
+.B openContainer
+commands.
+An in-memory container can be created using the command,
+\fBcreateContainer ""\fP.
+This is useful for using
+.B dbxml
+without file system side effects.
+.PP
+For a list of the commands available in the shell, use the
+.B help
+command.
+For help on a specific command, pass the command's name to the
+.B help
+command.
+For example:
+.IP
+.B dbxmlsh> help createContainer
+.PP
+The options are as follows:
+.TP
+.B -c
+Create a new environment in the directory specified by the
+.B -h
+option.
+This option should only be used for debugging \-
+since it does not allow you to specify
+important environment configuration options.
+.TP
+.BI -h\  home
+Specify a home directory for the database environment;
+by default, the current working directory is used.
+.TP
+.BI -P\  password
+Specify an environment password.
+Although Berkeley DB utilities overwrite password strings as soon as possible,
+be aware there may be a window of vulnerability
+on systems where unprivileged users can see command-line arguments
+or where utilities are not able to overwrite the memory
+containing the command-line arguments.
+.TP
+.BI -s\  script
+Execute the
+.B dbxml
+commands contained in the
+.I script
+file upon shell startup.
+The commands must be specified one to a line in the
+.I script
+file.
+If any of the commands contained in the
+.I script
+file fail, the shell will not start.
+
+For example, the following is the contents of a script that creates a container,
+loads several files into it, performs a query, and then prints the results:
+.RS
+.B createContainer myContainer.dbxml
+.br
+.B putDocument a {<a><b name="doc1">doc1 n1</b><c>doc1 n2</c></a>}
+.br
+.B putDocument a {<a><b name="doc2">doc2 n1</b><c>doc2 n2</c></a>}
+.br
+.B putDocument a {<a><b name="doc3">doc3 n1</b><c>doc3 n2</c></a>}
+.br
+.B query collection("myContainer.dbxml")/a/b
+.br
+.B print
+.RE
+.TP
+.B -t
+Run in transaction mode.
+Transactions can be used, and they are required for writes.
+
+Note that if you are running this utility against an existing environment,
+and that environment is transactional,
+this option will be automatically enabled.
+.TP
+.B -v
+Provide verbose output.
+Specify this option a second time to increase the shell's verbosity.
+.TP
+.B -V
+Write the library version number to the standard output, and exit.
+.TP
+.B -x
+Run in secure mode.
+XQuery queries cannot access the local filesystem or perform network access.
+.TP
+.BI -z\  size
+If creating an environment, specify the cache size in MB (default 64) in
+.IR size .
+.PP
+If you are using
+.B dbxml
+to manipulate containers that are managed by an existing database environment,
+you must specify the path to that existing database environment.
+.B dbxml
+cannot be used to create environment files
+that can be shared with other applications.
+It will either create a private environment,
+or join an existing, shareable environment created by another application.
+.SH ENVIRONMENT VARIABLES
+.TP
+.B DB_HOME
+If the
+.B -h
+option is not specified and the environment variable
+.B DB_HOME
+is set, it is used as the path of the database home, as described in
+.BR dbenv_open .
+.SH SEE ALSO
+.BR dbxml (1),
+.BR dbxml_dump (1),
+.BR dbxml_load (1),
+.BR dbxml_load_container (1)
+.SH AUTHOR
+.B dbxml_dump
+is part of Berkeley DB XML, developed by Oracle Corporation.
+.PP
+This manpage was formatted by Lars Buitinck <larsmans@gmail.com>
+based on the Berkeley DB XML documentation
+for the Debian project.
