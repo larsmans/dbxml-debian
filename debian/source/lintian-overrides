@@ -1,0 +1,3 @@
+# Lintian complains about old autotools files in XQilla and Xerces-C
+# source dirs, but we don't build those.
+dbxml source: ancient-autotools-helper-file
