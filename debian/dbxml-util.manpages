@@ -1,4 +1,4 @@
-debian/dbxml.1
-debian/dbxml_dump.1
-debian/dbxml_load.1
-debian/dbxml_load_container.1
+debian/manpages/dbxml.1
+debian/manpages/dbxml_dump.1
+debian/manpages/dbxml_load.1
+debian/manpages/dbxml_load_container.1
