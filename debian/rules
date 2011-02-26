@@ -22,10 +22,10 @@ CONFIGURE_SWITCHES = --prefix=/usr \
 version=$(shell expr `pwd` : '.*-\([0-9.]*\)')
 
 %:
-	dh --sourcedir=dbxml --with autotools-dev $@
+	dh $@ --sourcedirectory=dbxml --with autotools-dev
 
 override_dh_auto_configure:
-	dh_auto_configure --sourcedir=dbxml -- $(CONFIGURE_SWITCHES)
+	dh_auto_configure --sourcedirectory=dbxml -- $(CONFIGURE_SWITCHES)
 
 binary-indep: build install
 
