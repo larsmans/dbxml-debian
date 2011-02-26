@@ -1,3 +1,6 @@
 # Lintian complains about old autotools files in XQilla and Xerces-C
 # source dirs, but we don't build those.
-dbxml source: ancient-autotools-helper-file
+dbxml source: outdated-autotools-helper-file xerces-c-src/config/config.sub
+dbxml source: outdated-autotools-helper-file xerces-c-src/config/config.guess
+dbxml source: outdated-autotools-helper-file xqilla/autotools/config.sub
+dbxml source: outdated-autotools-helper-file xqilla/autotools/config.guess
