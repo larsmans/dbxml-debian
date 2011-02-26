@@ -10,6 +10,7 @@ Package: dbxml-doc
 Architecture: all
 Section: doc
 Depends: ${misc:Depends}
+Suggests: libdbxml-2.5, db4.8-doc
 Description: Oracle Berkeley DB XML [HTML documentation]
  Embedded native XML database library.
  .
@@ -17,7 +18,7 @@ Description: Oracle Berkeley DB XML [HTML documentation]
 
 Package: dbxml-util
 Architecture: any
-Depends: libdbxml-2.5 (= ${binary:Version}), ${misc:Depends}
+Depends: libdbxml-2.5 (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
 Suggests: db4.8-util
 Description: Oracle Berkeley DB XML utilities
  Embedded native XML database library.
@@ -39,7 +40,7 @@ Package: libdbxml-dev
 Architecture: any
 Section: libdevel
 Priority: extra
-Depends: libdbxml-2.5 (= ${binary:Version}), libdb4.8-dev (>= 4.8.30-2), ${misc:Depends}
+Depends: libdbxml-2.5 (= ${binary:Version}), libdb4.8-dev (>= 4.8.30-2), ${misc:Depends}, ${shlibs:Depends}
 Suggests: dbxml-doc
 Description: Oracle Berkeley DB XML libraries [development]
  Embedded native XML database library.
