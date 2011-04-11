@@ -2,7 +2,7 @@ Source: dbxml
 Section: database
 Priority: optional
 Maintainer: Lars Buitinck <larsmans@gmail.com>
-Build-Depends: debhelper (>= 7.0.50~), libdb4.8++-dev, libxqilla-dev, libxerces-c-dev, zlib1g-dev
+Build-Depends: autotools-dev, debhelper (>= 7.0.50~), libdb4.8++-dev, libxqilla-dev, libxerces-c-dev, zlib1g-dev
 Standards-Version: 3.9.1
 Homepage: http://www.oracle.com/us/products/database/berkeley-db/index-066571.html
 
